@@ -1,3 +1,2 @@
 // insert new collection to db
-use $1
 db.school.insertOne({ "name": "Holberton schoo"})
