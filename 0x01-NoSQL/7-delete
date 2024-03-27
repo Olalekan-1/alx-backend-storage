@@ -1,0 +1,4 @@
+// delete document
+
+db.school.delete({name: "Holberton school" });
+
