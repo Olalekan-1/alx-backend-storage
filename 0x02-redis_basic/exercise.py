@@ -8,6 +8,16 @@ from typing import Union, Callable
 from functools import wraps
 
 
+def replay(method: Callable) -> None:
+    input_key = method.__qualname__ + ":inputs"
+    output_key = method.__qualname__ + ":outputs"
+    inputs = cache._redis.lrange(input_key, 0, -1)
+    outputs = cache._redis.lrange(output_key, 0, -1)
+    print(f"{method.__qualname__} was called {len(inputs)} times:")
+    for args, output in zip(inputs, outputs):
+        print(f"{method.__qualname__}(*{args.decode()}) -> {output.decode()}")
+
+
 def count_calls(method: Callable) -> Callable:
     @wraps(method)
     def wrapper(self, *args, **kwargs):
