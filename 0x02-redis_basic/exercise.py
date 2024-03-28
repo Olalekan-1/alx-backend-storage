@@ -9,6 +9,7 @@ from functools import wraps
 
 
 def replay(method: Callable) -> None:
+    """ replay function """
     input_key = method.__qualname__ + ":inputs"
     output_key = method.__qualname__ + ":outputs"
     inputs = cache._redis.lrange(input_key, 0, -1)
