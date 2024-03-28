@@ -9,6 +9,7 @@ import time
 
 
 def get_page(url: str) -> str:
+    """ get page function """
     redis_conn = redis.Redis()
 
     count_key = f"count:{url}"
